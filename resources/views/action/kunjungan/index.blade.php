@@ -29,7 +29,7 @@
                             </div>
                         </form>
                         <br><br>
-                        <form action="{{ url('ubah_supplier/store') }}" method="post">
+                        <form action="{{ url('kunjungan/store') }}" method="post">
                             @csrf
                             @isset($data)
                             <div class="table-responsive">
@@ -39,6 +39,7 @@
                                             <th>Nama Pasien</th>
                                             <th>Tanggal Masuk</th>
                                             <th>Tanggal Pulang</th>
+                                            <th>Jenis Rawat</th>
                                             <th>#</th>
                                         </tr>
                                     </thead>
@@ -47,12 +48,16 @@
                                             <tr>
                                                 <td>{{ $item->nama_pasien }}</td>
                                                 <td>{{ $item->tgl_masuk }}</td>
-                                                <td>{{ $item->tgl_pulang }}</td>
+                                                <td>{{ $item->tgl_keluar }}</td>
+                                                <td>{{ $item->jenis_rawat }}</td>
                                                 <td>
-                                                    <a onclick="return edit({{ $item->jenis_survey_id }})"
-                                                        class="btn text-white btn-info">Ubah</a>
-                                                    <a onclick="return confirm('Apakah anda yakin ini dihapus?')" href="{{ url('jenis_survey/delete/' . Crypt::encrypt($item->jenis_survey_id)) }}"
-                                                        class="btn text-white btn-danger">Hapus</a>
+                                                    @if(!empty($item->tgl_keluar))
+                                                    <a onclick="return confirm('Apakah anda yakin ini ingin diaktifkan kembali?')" href="{{ url('kunjungan/aktif/' . Crypt::encrypt($item->registrasi_id)) }}"
+                                                        class="btn text-white btn-danger">Kembalikan</a>
+                                                    @else
+                                                    <a onclick="return confirm('Apakah anda yakin ini ingin dipulangkan?')" href="{{ url('kunjungan/pulang/' . Crypt::encrypt($item->registrasi_id)) }}"
+                                                        class="btn text-white btn-warning">Pulangkan</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

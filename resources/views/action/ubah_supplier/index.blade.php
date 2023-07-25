@@ -58,6 +58,9 @@
                             </table>
                             <input type="hidden" name="pemesanan_brg_id" value="{{ $data->pemesanan_brg_id }}">
                             <button type="submit" class="btn btn-primary btn-block bg-primary">Simpan</button>
+                            @if($item->status_terima == 1)
+                            <a onclick="return confirm('Apakah anda yakin ingin anda batalkan terima?')" href="{{ url('ubah_supplier/batal_terima/'. $item->pemesanan_brg_id) }}" class="btn btn-danger">Batal Terima</a>
+                            @endif
                         @endisset
                     </form>
                     </div>
