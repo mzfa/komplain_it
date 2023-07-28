@@ -50,7 +50,7 @@
                                     <td>
                                         <select name="supplier_id" class="form-control select2" >
                                             @foreach($supplier as $item)
-                                            <option value="{{ $item->supplier_id }}">{{ $item->nama_supplier }}</option>
+                                            <option @if($item->supplier_id == $data->supplier_id) selected @endif value="{{ $item->supplier_id }}">{{ $item->nama_supplier }}</option>
                                             @endforeach
                                         </select>
                                     </td>
@@ -58,8 +58,10 @@
                             </table>
                             <input type="hidden" name="pemesanan_brg_id" value="{{ $data->pemesanan_brg_id }}">
                             <button type="submit" class="btn btn-primary btn-block bg-primary">Simpan</button>
-                            @if($item->status_terima == 1)
-                            <a onclick="return confirm('Apakah anda yakin ingin anda batalkan terima?')" href="{{ url('ubah_supplier/batal_terima/'. $item->pemesanan_brg_id) }}" class="btn btn-danger">Batal Terima</a>
+                            @if($data->status_terima == 1)
+                                <a onclick="return confirm('Apakah anda yakin ingin anda batalkan terima?')" href="{{ url('ubah_supplier/batal_terima/'. $data->pemesanan_brg_id) }}" class="btn btn-danger w-100 mt-2">Batal Terima</a>
+                            @else
+                                <a onclick="return confirm('Benerannn udah di terimaa?')" href="{{ url('ubah_supplier/sudah_terima/'. $data->pemesanan_brg_id) }}" class="btn btn-danger w-100 mt-2">Terima Barang</a>
                             @endif
                         @endisset
                     </form>

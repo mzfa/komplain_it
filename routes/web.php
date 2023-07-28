@@ -82,7 +82,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::controller(UbahSupplierController::class)->middleware('cek_login:ubah_supplier.index')->group(function () {
         Route::get('/ubah_supplier', 'index')->name('ubah_supplier.index');
         Route::post('/ubah_supplier', 'detail');
-        Route::post('/ubah_supplier/batal_terima/{id}', 'batal_terima');
+        Route::get('/ubah_supplier/batal_terima/{id}', 'batal_terima');
+        Route::get('/ubah_supplier/sudah_terima/{id}', 'sudah_terima');
         Route::post('/ubah_supplier/store', 'store');
     });
     Route::controller(KunjunganController::class)->middleware('cek_login:kunjungan.index')->group(function () {

@@ -44,6 +44,26 @@ class UbahSupplierController extends Controller
 
         // return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!']);
     }
+    public function sudah_terima($id){
+        // dd($request);
+        $data = [
+            'status_terima' => 1,
+        ];
+        DB::connection('PHIS-V2')->table('pemesanan_brg')->where(['pemesanan_brg_id' => $id])->update($data);
+        return Redirect::back()->with(['success' => 'Data Berhasil Di Ubah!']);
+
+        // return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
+    public function batal_terima($id){
+        // dd($request);
+        $data = [
+            'status_terima' => null,
+        ];
+        DB::connection('PHIS-V2')->table('pemesanan_brg')->where(['pemesanan_brg_id' => $id])->update($data);
+        return Redirect::back()->with(['success' => 'Data Berhasil Di Ubah!']);
+
+        // return Redirect::back()->with(['success' => 'Data Berhasil Di Simpan!']);
+    }
 
     
 }
